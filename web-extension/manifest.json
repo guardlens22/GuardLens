@@ -1,0 +1,42 @@
+{
+  "manifest_version": 2,
+  "name": "GuardLens",
+  "description": "GuardLens gives users easy access to security and privacy-related information about a website upon request.",
+  "author": "Natã M. Barbosa",
+  "version": "1.2.1",
+  "icons": {
+    "128": "icon.png"
+  },
+  "content_scripts": [
+      {
+        "matches": [
+          "<all_urls>"
+        ],
+        "js": ["node_modules/webextension-polyfill/dist/browser-polyfill.js", "guardLens.js", "content.js"],
+        "run_at": "document_end"
+      }
+    ],
+  "background": {
+    "scripts": ["node_modules/webextension-polyfill/dist/browser-polyfill.js", "require.js", "background.js"],
+    "persistent": true
+  },
+  "web_accessible_resources": [
+    "icon-bw.png",
+    "aria.modal.css",
+    "aria.modal.min.js",
+    "inert-polyfill.min.js"
+  ],
+  "permissions": [
+    "https://guardlens.natabarbosa.com/*",
+    "https://webtasks.natabarbosa.com/*",
+    "activeTab",
+    "storage",
+    "<all_urls>"
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "secnudges@ischool.illinois.edu"
+    }
+  },
+  "content_security_policy": "script-src 'self' https://docs.opencv.org 'unsafe-eval'; object-src 'self'"
+}
